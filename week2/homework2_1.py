@@ -5,3 +5,12 @@
 # Author: Ernest B McDowell
 # Date: 26JAN2022
 #
+
+def stocks_apr():
+
+    return
+
+
+def calc_investment():
+
+    return
