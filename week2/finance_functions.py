@@ -12,6 +12,7 @@ def compound_interest(principal, rate, length_of_investment, compound_frequency)
 
 
 def calc_stock_apr(start_price, end_price, length_of_investment):
-    compound_frequency = 12
+    compound_frequency = float(input('Enter the frequency interest will compound: '))
     rate = compound_frequency*((end_price/start_price)**(1/(compound_frequency*length_of_investment))-1)
-    return rate
+    return float(round(rate,2))
+
