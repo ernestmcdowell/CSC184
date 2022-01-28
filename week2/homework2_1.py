@@ -34,7 +34,7 @@ def test_annuity(rate, frequency, payment):
 stock_apr = calc_stock_apr() # assign function to new variable
 print('The APR for the stock is: ' + str(stock_apr)+'%'' over 5 years')
 
-annuity_calc = calc_annuity() # assing function to new variable 
+annuity_calc = calc_annuity() # assign function to new variable 
 print('If you had invested $100 per month you would have earned: $'+str(annuity_calc))
 
 

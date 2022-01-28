@@ -1,1 +1,1 @@
-# Backup for CSC184 homework
+# Repository for CSC184 Homework
