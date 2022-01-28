@@ -1,0 +1,83 @@
+# Title: Homework2_1 for CSC-184-40
+#
+# Description: Take user input of stocks and calculate APR over a 5 year period
+#
+# Author: Ernest B McDowell
+# Date: 26JAN2022
+#
+# Annuity formula is annuity = contribution*(1+rate/compound_frequency)**(compound_frequency*length_of_investment)-1)/(rate/compound_frequency)
+#
+
+def tsla():
+    start_price = 50.00
+    end_price = 821.10
+    time_length = 5
+    compound_frequency = 12
+    contribution = 100
+    rate = compound_frequency*((end_price/start_price)**(1/(compound_frequency*time_length))-1)
+    calced_rate = (float(round(rate*100,2)))
+    print('The APR for TSLA over the last 5 years was: '+str(calced_rate)+'%')
+    annuity = contribution*((1+(calced_rate/100)/compound_frequency)**(compound_frequency*time_length)-1)/(rate/compound_frequency)
+    print('If you had invested 100 dollars a month in TSLA for 5 years you would have: $'+str(round(annuity,2)))
+
+def spy():
+    start_price = 236.47
+    end_price = 431.24
+    time_length = 5
+    compound_frequency = 12
+    contribution = 100
+    rate = compound_frequency*((end_price/start_price)**(1/(compound_frequency*time_length))-1)
+    calced_rate = (float(round(rate*100,2)))
+    print('The APR for TSLA over the last 5 years was: '+str(calced_rate)+'%')
+    annuity = contribution*((1+(calced_rate/100)/compound_frequency)**(compound_frequency*time_length)-1)/(rate/compound_frequency)
+    print('If you had invested 100 dollars a month in TSLA for 5 years you would have: $'+str(round(annuity,2)))
+
+def aapl():
+    start_price = 34.25
+    end_price = 159.22
+    time_length = 5
+    compound_frequency = 12
+    contribution = 100
+    rate = compound_frequency*((end_price/start_price)**(1/(compound_frequency*time_length))-1)
+    calced_rate = (float(round(rate*100,2)))
+    print('The APR for TSLA over the last 5 years was: '+str(calced_rate)+'%')
+    annuity = contribution*((1+(calced_rate/100)/compound_frequency)**(compound_frequency*time_length)-1)/(rate/compound_frequency)
+    print('If you had invested 100 dollars a month in TSLA for 5 years you would have: $'+str(round(annuity,2)))
+
+def ntdoy():
+    start_price = 26.11
+    end_price = 61.19
+    time_length = 5
+    compound_frequency = 12
+    contribution = 100
+    rate = compound_frequency*((end_price/start_price)**(1/(compound_frequency*time_length))-1)
+    calced_rate = (float(round(rate*100,2)))
+    print('The APR for TSLA over the last 5 years was: '+str(calced_rate)+'%')
+    annuity = contribution*((1+(calced_rate/100)/compound_frequency)**(compound_frequency*time_length)-1)/(rate/compound_frequency)
+    print('If you had invested 100 dollars a month in TSLA for 5 years you would have: $'+str(round(annuity,2)))
+
+def calc_stock_apr():
+    print('Stock APR Calculator') #Title to show what is being calculated 
+    start_price = float(input('Enter stock starting price: ')) #starting price of the stock 
+    end_price = float(input('Enter the stock ending price: ')) #ending price of the stock 
+    length_of_investment = 5 # length of the investment in years
+    compound_frequency = int(input('Enter the frequency at which interest will compound: ')) # frequency at which interest will compound ie. monthly(12), weekly(52) etc..
+    rate = compound_frequency*((end_price/start_price)**(1/(compound_frequency*length_of_investment))-1) # compound interest formula
+    return float(round(rate*100,2)) # multiplies the result of rate by 100 to get percentage and rounds to 2 decimal places
+
+def calc_annuity():
+    print('Annuity Calculator') #Title to show what is being calculated
+    rate = float(input('Enter the APR: ')) # enter the APR given from the previous calculation
+    length_of_investment = 5 # investment length in years
+    compound_frequency = 12 # frequency interest will be compounded
+    contribution = 100 # dollar amount of monthly contribution
+    annuity = contribution*((1+(rate/100)/compound_frequency)**(compound_frequency*length_of_investment)-1)/(rate/compound_frequency) # annuity formula 
+    return round(annuity*100,2) # multiply annuity result by 100 for proper decimal placement and rounds the result from annuity to 2 decimal places
+
+tsla()
+spy()
+aapl()
+ntdoy()
+
+print(calc_annuity())
+print(calc_stock_apr())
