@@ -9,7 +9,7 @@
 #
 
 def tsla():
-    start_price = 50.00
+    start_price = 50.10
     end_price = 821.10
     time_length = 5
     compound_frequency = 12
