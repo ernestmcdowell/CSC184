@@ -25,7 +25,7 @@ stock_name = str(input('Enter the stock name: '))
 new_start = float(input('Enter stock starting price: $')) # get starting price of user input stock
 new_end = float(input('Enter stock ending price: $')) # get ending price of user input stock
 new_length = float(input('Enter the length of investment in years: ')) # get user input length of investment
-user_contrib = float(input('Enter your custom contribution ammount: $') + '\n') # get user input contribution dollar ammount
+user_contrib = float(input('Enter your custom contribution amount: $') + '\n') # get user input contribution dollar amount
 
 contribution = float(100) # the contribution amount in dollars for TSLA SPY NTDOY and AAPL
 compound_frequency = 12 # the compound frequency in months 
@@ -37,13 +37,13 @@ def calc_apr(start, end, time): # calculate the apr based on start price, end pr
 
 def calc_annuity(contribution, rate, time, compound_frequency):
     amount = contribution*((1+(rate/100)/compound_frequency)**(compound_frequency*time)-1)/(rate/compound_frequency) # annuity formula
-    amount = round(amount*100,2) # multiplies the ammount by 100 for correct decimal placement and rounds 2 places after decimal
+    amount = round(amount*100,2) # multiplies the amount by 100 for correct decimal placement and rounds 2 places after decimal
     return amount
 
 def stocks_final(): 
     """
-    This function calls the calc_apr and calc_annuity function. Using user defined input and
-    the defined variables it calculate the stocks APR and, using that APR, calculates the projected annuity ammount. 
+    This function calls the calc_apr and calc_annuity functions. Using user defined input and
+    the defined variables it calculates the stocks APR and, using that APR, calculates the projected annuity amount. 
     Finally it prints the results for each stocks APR and annuity amount.
     """
         
