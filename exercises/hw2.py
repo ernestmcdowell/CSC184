@@ -1,7 +1,5 @@
-# Title: Setup a function to calculate compound interest
-#
-# Description: Homework 2.1
-#
+# Title: Homework2_1 for CSC-184-40
+# Description: Take user input of stock prices and calculate APR over a period period of time and return potential annuity based on stock apr
 # Author: Ernest B McDowell
 # Date: 26JAN2022
 #
@@ -23,47 +21,55 @@ tsla_start = 50.00
 tsla_end = 821.10
 tsla_length = 5
 #User input stock
-new_start = float(input('Stock starting price: ')) # get starting price of user input stock
-new_end = float(input('Stock ending price: ')) # get ending price of user input stock
-new_length = float(input('Enter length of investment: ')) # get user input length of investment
+stock_name = str(input('Enter the stock name: '))
+new_start = float(input('Enter stock starting price: $')) # get starting price of user input stock
+new_end = float(input('Enter stock ending price: $')) # get ending price of user input stock
+new_length = float(input('Enter the length of investment in years: ')) # get user input length of investment
+user_contrib = float(input('Enter your custom contribution amount: $') + '\n') # get user input contribution dollar amount
 
-principal = 100 # the prinicpal investment in dollars
-compounds = 12 # the compound frequency in months 
+contribution = float(100) # the contribution amount in dollars for TSLA SPY NTDOY and AAPL
+compound_frequency = 12 # the compound frequency in months 
 
-def calc_apr(start, end, time):
-    rate = compounds*((end/start)**(1/(compounds*time))-1) # compound interest formula
+def calc_apr(start, end, time): # calculate the apr based on start price, end price, and length of investment in years
+    rate = compound_frequency*((end/start)**(1/(compound_frequency*time))-1) # compound interest formula
     rate = round(rate*100,2) # multiplies the rate by 100 for correct decimal placement and rounds 2 places after decimal
     return rate
 
-def calc_annuity(principal, rate, time, compounds):
-    amount = principal*((1+(rate/100)/compounds)**(compounds*time)-1)/(rate/compounds)
-    amount = round(amount*100,2) # multiplies the ammount by 100 for correct decimal placement and rounds 2 places after decimal
+def calc_annuity(contribution, rate, time, compound_frequency):
+    amount = contribution*((1+(rate/100)/compound_frequency)**(compound_frequency*time)-1)/(rate/compound_frequency) # annuity formula
+    amount = round(amount*100,2) # multiplies the amount by 100 for correct decimal placement and rounds 2 places after decimal
     return amount
 
-def stocks_final():
-    user_apr = (calc_apr(new_start, new_end, new_length))
-    user_annuity = calc_annuity(principal, user_apr, new_length, compounds)
-    print('The APR for your stock was: '+str(user_apr)+'%')
-    print('if you had invested $100 a month in the stock over 5 years you would have: $'+str(user_annuity))
+def stocks_final(): 
+    """
+    This function calls the calc_apr and calc_annuity functions. Using user defined input and
+    the defined variables it calculates the stocks APR and, using that APR, calculates the projected annuity amount. 
+    Finally it prints the results for each stocks APR and annuity amount.
+    """
+        
+    user_apr = (calc_apr(new_start, new_end, new_length)) 
+    user_annuity = calc_annuity(user_contrib, user_apr, new_length, compound_frequency) 
+    print('The APR for '+str(stock_name)+' was: '+str(user_apr)+'%') 
+    print('If you had invested $'+str(user_contrib)+' every month in '+str(stock_name)+' over 5 years you would have: $'+str(user_annuity)+'\n') 
     
     aapl_apr = calc_apr(aapl_start, aapl_end, aapl_length)
-    aapl_annuity = calc_annuity(principal, aapl_apr, aapl_length, compounds)
+    aapl_annuity = calc_annuity(contribution, aapl_apr, aapl_length, compound_frequency)
     print('The APR for AAPL was: '+str(aapl_apr)+'%')
-    print('if you had invested $100 a month in AAPL over 5 years you would: $'+str(aapl_annuity))
+    print('If you had invested $'+str(contribution) +' every month in AAPL over 5 years you would have: $'+str(aapl_annuity)+'\n')
     
     ntdoy_apr = calc_apr(ntdoy_start, ntdoy_end, ntdoy_length)
-    ntdoy_annuity = calc_annuity(principal, ntdoy_apr, ntdoy_length, compounds)
+    ntdoy_annuity = calc_annuity(contribution, ntdoy_apr, ntdoy_length, compound_frequency)
     print('The APR for NTDOY was: '+str(ntdoy_apr)+'%')
-    print('if you had invested $100 a month in NTDOY over 5 years you would have: $'+str(ntdoy_annuity))
+    print('If you had invested $'+str(contribution) +' every month in NTDOY over 5 years you would have: $'+str(ntdoy_annuity)+'\n')
     
     spy_apr = calc_apr(spy_start, spy_end, spy_length)
-    spy_annuity = calc_annuity(principal, spy_apr, spy_length, compounds)
+    spy_annuity = calc_annuity(contribution, spy_apr, spy_length, compound_frequency)
     print('The APR for SPY was: '+str(spy_apr)+'%')
-    print('if you had invested $100 a month in SPY over 5 years you would have: $'+str(spy_annuity))
+    print('If you had invested $'+str(contribution) +' every month in SPY over 5 years you would have: $'+str(spy_annuity)+'\n')
     
     tsla_apr = calc_apr(tsla_start, tsla_end, tsla_length)
-    tsla_annuity = calc_annuity(principal, tsla_apr, tsla_length, compounds)
+    tsla_annuity = calc_annuity(contribution, tsla_apr, tsla_length, compound_frequency)
     print('The APR for TSLA was: '+str(tsla_apr)+'%')
-    print('if you had invested $100 a month in TSLA over 5 years you would have: $'+str(tsla_annuity))
+    print('If you had invested $'+str(contribution) +' every month in TSLA over 5 years you would have: $'+str(tsla_annuity))
     
 stocks_final()
