@@ -45,8 +45,7 @@ def stocks_final():
     This function calls the calc_apr and calc_annuity functions. Using user defined input and
     the defined variables it calculates the stocks APR and, using that APR, calculates the projected annuity amount. 
     Finally it prints the results for each stocks APR and annuity amount.
-    """
-        
+    """        
     user_apr = (calc_apr(new_start, new_end, new_length)) 
     user_annuity = calc_annuity(user_contrib, user_apr, new_length, compound_frequency) 
     print('The APR for '+str(stock_name)+' was: '+str(user_apr)+'%') 
@@ -71,5 +70,5 @@ def stocks_final():
     tsla_annuity = calc_annuity(contribution, tsla_apr, tsla_length, compound_frequency)
     print('The APR for TSLA was: '+str(tsla_apr)+'%')
     print('If you had invested $'+str(contribution) +' every month in TSLA over 5 years you would have: $'+str(tsla_annuity))
-    
+
 stocks_final()
