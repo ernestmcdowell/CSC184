@@ -30,7 +30,7 @@ down_payment = float(input('Please input down payment: '))
 vary_rate_credit_rating= mortgage_rate*0.18/2
 vary_of_credit_rating = credit_rating-700
 mortgage_rate = mortgage_rate - vary_rate_credit_rating*vary_of_credit_rating/100
-property_taxes = round(house_value*0.016/12,2)
+property_taxes = round(house_value*0.027/12,2)
 
 if down_payment>house_value*0.2:
     PMI= True

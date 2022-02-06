@@ -9,8 +9,6 @@
 # Variables
 monthly_max = float(2850)
 down_payment = float(75000.00)
-pmi = float(.0180)
-prop_tax = monthly_max*(0.027*12)
 mortgage_term = float(30.00)
 
 def chose_loan():
@@ -39,30 +37,36 @@ def chose_loan():
     return mortgage_rate
 mortgage_rate = chose_loan()
 
-def calc_can_barrow():
-    # assume that is is a monthly payments
-    can_barrow = (monthly_max)*(1-(1+(mortgage_rate/12))**(-12*30))/(mortgage_rate/12)*(prop_tax/100)
-    can_barrow = round(can_barrow,2)
-    return float(can_barrow)
+if down_payment > house_value*0.18:
+    PMI = True
+    print("PMI")
+else:
+    PMI = False
+    print("No PMI")
 
-barrowable = calc_can_barrow()
+# mortgage_principal = barrowable - down_payment
+# prop_tax = barrowable*0.027
 
+# print(mortgage_principal)
 def calc_mortgage_payment():
     # assume that is is a monthly payments
-    mortgage_payment = barrowable/((1-(1+mortgage_rate/12)**(-12*mortgage_term))/(mortgage_rate/12))
+    mortgage_payment = house_value/((1-(1+mortgage_rate/12)**(-12*mortgage_term))/(mortgage_rate/12))
     mortgage_payment = round(mortgage_payment)
-    return mortgage_payment
+    return mortgage_payment 
 monthly_payment = calc_mortgage_payment()
+mortgage_payment = monthly_payment + monthly_payment*PMI*0.018
 
+def calc_can_barrow():
+    # assume that is is a monthly payments
+    can_barrow = (monthly_max)*(1-(1+(mortgage_rate/12))**(-12*30))/(mortgage_rate/12)
+    can_barrow = round(can_barrow,2)
+    return float(can_barrow)
+barrowable = calc_can_barrow()
+house_value = barrowable - barrowable*0.027
 
-# if down_payment > house_value*0.2:
-#     pmi = True
-# else:
-#     pmi = False
+print(round(house_value,2))
 
-print('Property Taxes: $'+str(prop_tax))
+# print('Property Taxes: $'+str(prop_tax))
 calc_can_barrow()
-print('Monthly Payment: $'+str(monthly_payment))
-print('With a downpayment of $'+str(down_payment)+' and max monthly payment of $'+str(monthly_max)+' you can get a loan for $'+str(barrowable))
-
-# calc_mortgage_payment()
+print('Monthly Payment: $'+str(mortgage_payment))
+print('With a downpayment of $'+str(down_payment)+' and max monthly payment of $'+str(monthly_max)+' you can get a loan for $'+str(round(house_value,2)))
