@@ -1,46 +1,93 @@
-# Create a python program that figures out how much house you can afford with the following restrictions.
-# You have only $2850 per month spare for mortgages payments, taxes and PMI insurance.
-# You have $75,000 for a down payment.
-# If you pay PMI the rate is 1.8% of the mortgage payments
-# Taxes are 2.7% of the value of the home to be paid monthly.
-# You have 3 different mortgage companies offering 4.75%, 5.25% and 6.13% APR on 30 year mortgages.
-# How much house can you afford for each of the different rates.
+# Homework for CSC184-40
+#
+# Author: Beau McDowell
+# Date: 09FEB2020
+#
+# calculate amount you can barrow based off of 2850 a month downpayment of 75000 and PMI at 1.8
 
-# Title: Calculating more realistic Mortgage Payments
-#
-# Description: input credit rating, 30 year fixed, PMI, property taxes and give back mortgage payments
-#
-# Author: Gavin Waters
-# Date: 02/02/2022
-#
-# 
 
-def calc_mortgage_payment(mortgage_principal, mortgage_rate,mortgage_term):
-    # assume that is is a monthly payments
-    mortgage_rate = mortgage_rate/100
-    mortgage_payment = mortgage_principal/((1-(1+mortgage_rate/12)**(-12*mortgage_term))/(mortgage_rate/12))
-    mortgage_payment = round(mortgage_payment,2)
+down_payment = 75000
+
+
+def chose_max():
+    monthly_max1 = 2850
+    monthly_max2 = 1600
+    print("1:) $2850 a month.")
+    print("2:) $1600 a month.")
+    monthly_inp = input(
+        "Chose the amount you want to spend monthly on a house.")
+
+    if monthly_inp == "1":
+        monthly_max = monthly_max1
+        print("Using $"+str(monthly_max1)+" as monthly payment.")
+    elif monthly_inp == "2":
+        monthly_max = monthly_max2
+        print("Using $"+str(monthly_max2)+" as monthly payment.")
+    else:
+        print("You must select a monthly payments.")
+    return monthly_max
+
+
+monthly_max = chose_max()
+
+
+def chose_loan():
+    mortgage_rate1 = 0.04750  # loan option 1 apr
+    mortgage_rate2 = 0.0525  # loan option 2 apr
+    mortgage_rate3 = 0.0613  # loan option 3 apr
+    print("Loan 1: "+str(mortgage_rate1*100)+'%')
+    print("Loan 2: "+str(mortgage_rate2*100)+'%')
+    print("Loan 3: "+str(mortgage_rate3*100)+'%')
+    apr_inp = input("Chose Loan (1, 2, 3) : ")
+    if apr_inp == "1":
+        mortgage_rate = mortgage_rate1
+        print("Calculating loan amount using 1:) " +
+              str(mortgage_rate1*100)+'% '+'interest')
+    elif apr_inp == "2":
+        mortgage_rate = mortgage_rate2
+        print("Calculating loan amount using 2:) " +
+              str(mortgage_rate2*100)+'% '+'interest')
+    elif apr_inp == "3":
+        mortgage_rate = mortgage_rate3
+        print("Calculating loan amount using 3:) " +
+              str(mortgage_rate3*100)+'% '+'interest')
+    else:
+        print("You must chose an option")
+        return chose_loan()
+    return mortgage_rate
+
+
+mortgage_rate = chose_loan()
+
+
+def calc_can_barrow():  # calculate the amount user can barrow based on monthly_max
+    can_barrow = (monthly_max)*(1-(1+(mortgage_rate/12))
+                                ** (-12*30))/(mortgage_rate/12)
+    can_barrow = round(can_barrow, 2)
+    return can_barrow
+
+
+can_barrow = calc_can_barrow()
+
+
+def calc_mortgage_payment():
+    mortgage_payment = can_barrow / \
+        ((1-(1+mortgage_rate/12)**(-12*30))/(mortgage_rate/12))
+    mortgage_payment = round(mortgage_payment, 2)
     return mortgage_payment
 
-house_value = float(input('Please input the value of the property: '))
-mortgage_rate = float(input('Please input the mortgage rate: '))
-mortgage_term = int(input('Please input the mortage length in years: '))
-credit_rating = int(input('Please input your credit rating(600-800) :'))
-down_payment = float(input('Please input down payment: '))
-vary_rate_credit_rating= mortgage_rate*0.18/2
-vary_of_credit_rating = credit_rating-700
-mortgage_rate = mortgage_rate - vary_rate_credit_rating*vary_of_credit_rating/100
-property_taxes = round(house_value*0.027/12,2)
 
-if down_payment>house_value*0.2:
-    PMI= True
-else:
-    PMI=False
+mortgage_payment = calc_mortgage_payment()
 
-mortgage_principal = house_value - down_payment
-mortgage_payment = calc_mortgage_payment(mortgage_principal,mortgage_rate,mortgage_term)
-mortgage_payment = mortgage_payment + mortgage_payment*PMI*0.013
-total_monthly_payments = round(mortgage_payment + property_taxes,2)
+# if down_payment < can_barrow*0.20:
+#     pmi = True
+#     print("Paying PMI")
+# else:
+#     pmi = False
+#     print("Not Paying PMI")
 
-print()
-print('The total monthly payments for a house value of $'+str(house_value)+ ' with a down payment of $'+ str(down_payment)+' will be $'+str(total_monthly_payments))
+# mortgage_payment = mortgage_payment + mortgage_payment*pmi*0.018
+print(mortgage_payment)
+total_monthly_payments = round(mortgage_payment, 2)
+print("With a down payment of $"+str(down_payment)+" and a monthly max payment of $" +
+      str(monthly_max)+" you can get a loan for $"+str(round(can_barrow - down_payment, 2)))
