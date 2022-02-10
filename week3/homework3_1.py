@@ -3,7 +3,7 @@
 # Author: Beau McDowell
 # Date: 09FEB2020
 #
-# calculate amount you can barrow based off of 2850 a month downpayment of 75000 and PMI at 1.8
+# calculate amount you can barrow based off of $2850 or $1600 a month downpayment of 75000 and PMI at 1.8
 down_payment = 75000 # $75,000 down payment
 
 # lets user choose between 2850 or 1600 a month to calculate loan. assign chosen input to monthly_max variable.
