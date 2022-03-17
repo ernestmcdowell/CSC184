@@ -9,7 +9,7 @@
 # Author: Beau McDowell
 # Date: 02MAR2022
 #
-# Pythong program that allows you to play The Game of Pig.
+# Python program that allows you to play The Game of Pig.
 
 import random
 
