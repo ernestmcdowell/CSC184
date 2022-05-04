@@ -35,27 +35,36 @@ def searcher():
     count = 0
     is_searching = True
     print("Search for employee information.")
-    search = str(input("Enter last name of employee: "))
+    search = str(input("Enter first and last name of employee: ")).capitalize()
     print("Search Result...")
     print()
     while is_searching:
         for row in employee_read:
-            if search.capitalize() == row[1]:
-                print("Employee Number: " + row[0])
-                print("Full Name: " + row[1], row[2])
-                print("Phone Number: " + row[3])
-                print("Address: " + row[4], row[5])
+            if search == row[1]:
                 count += 1
                 print(count)
+                if count == 2:
+                    first_name = input("Please enter employee first name to narrow search : ")
+                    if first_name == row[2]:
+                        print("Employee Number: " + row[0])
+                        print("Full Name: " + row[1], row[2])
+                        print("Phone Number: " + row[3])
+                        print("Address: " + row[4], row[5])
+                elif count == 1:
+                    if search == row[1]:
+                        print("Employee Number: " + row[0])
+                        print("Full Name: " + row[1], row[2])
+                        print("Phone Number: " + row[3])
+                        print("Address: " + row[4], row[5])
 
         for row in salary_read:
-            if search.capitalize() == row[1]:
+            if search == row[1]:
                 print("Immediate Supervisor: " + row[4])
                 print("Salary: $" + row[5])
                 print("Title: " + row[6])
                 print()
 
-        continue_search = input("Do you want to search for another employee?")
+        continue_search = input("Do you want to search for another employee? y/n ").capitalize()
         if continue_search == "Y":
             is_searching = True
             employee_file.seek(0)
